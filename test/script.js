@@ -21,35 +21,47 @@ const myClip = new MC.Clip({
     }`
 });
 
-const flubberIncident = new FlubberPlugin.Flubber(
-    {
-        animatedAttrs: {
-            d: [[0, 0], [2, 0], [2, 1], [1, 2], [0, 1]]
-        }
-    },
-    {
-        selector: '#flubber',
-        duration: 2000
+const flubberIncident = new FlubberPlugin.Flubber({
+    animatedAttrs: {
+        d: [
+            [0, 0],
+            [2, 0],
+            [2, 1],
+            [1, 2],
+            [0, 1]
+        ]
     }
-);
+}, {
+    selector: '#flubber',
+    duration: 2000
+});
 
-const fubberIncident2 = new FlubberPlugin.Flubber(
-    {
-        animatedAttrs: {
-            d: "M2 1 h1 v1 h1 v1 h-1 v1 h-1 v-1 h-1 v-1 h1 z"
-        }
-    },
-    {
-        selector: '#flubber',
-        duration: 2000
+const fubberIncident2 = new FlubberPlugin.Flubber({
+    animatedAttrs: {
+        d: "M2 1 h1 v1 h1 v1 h-1 v1 h-1 v-1 h-1 v-1 h1 z"
     }
-); 
+}, {
+    selector: '#flubber',
+    duration: 2000
+});
 
 myClip.addIncident(flubberIncident, 0);
 myClip.addIncident(fubberIncident2, 2000);
-new Player({clip: myClip, speed: 10});
+new Player({
+    clip: myClip,
+    speed: 5,
+    mode: 'chapters',
+    chapters: [{
+            millisecond: 2000,
+            name: 'chapter 1'
+        },
+        {
+            millisecond: 4000,
+            name: 'chapter 2'
+        }
+    ],
+    transitionSpeed: 2
+});
 
 
 // myClip.play();
-
-
