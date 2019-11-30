@@ -1,5 +1,6 @@
 const MC = require('@kissmybutton/motorcortex');
 const TimeCapsule = new MC.TimeCapsule();
+const prefix = '@kissmybutton/scrollbar_player';
 
 class Player {
     /**
@@ -13,11 +14,17 @@ class Player {
      * - transitionSpeed: a number > 0 that defines the speed of the transition
      * - latency: an integer (in milliseconds) after wheel event that will trigger transition to chapter
      * - progressIndicator: default false. If set to true a progress indicator will appear
+     * - swipeAxis: (either 'vertical' or 'horizontal'. Default = 'vertical')
      * - easing: any of the supported MotorCortex easings
+     * - scrollbar: an object with scrollbar configuration:
+     *  - display: (boolean, default = true)
+     *  - color: the color of the scrollbar (default purple)
+     *  - position: (either "left", "right", "top" or "bottom", default "right")
      **/
     constructor(options = {}) {
         this.clip = options.clip;
         this.host = this.clip.props.host;
+        this.swipeAxis = (options.swipeAxis || 'vertical') === 'vertical' ? 'clientY' : 'clientX';
 
         const mode = options.mode || "free";
         if (mode === "free") {
@@ -44,12 +51,58 @@ class Player {
 
         const speedFactor = 5 / (options.wheelSpeed || 5);
         this.speed = 1 / speedFactor;
+
+        let scrollbarOptions = {
+            display: true,
+            position: 'right',
+            color: 'purple'
+        };
+        if (options.hasOwnProperty('scrollbar')) {
+            Object.assign(scrollbarOptions, options.scrollbar);
+        }
+        this._setupScrollbar(scrollbarOptions);
+    }
+
+    _setupScrollbar(options) {
+        if (options.display === false) {
+            return;
+        }
+
+        const scrollbarDiv = document.createElement('div');
+        scrollbarDiv.setAttribute('id', `${prefix}-scrollbarId`);
+
+        let cssAttrs;
+        let variable;
+        switch (options.position) {
+            case 'left':
+                cssAttrs = 'left:0px; top: 0px; width: 2px; height: 0%;';
+                variable = 'height';
+                break;
+            case 'right':
+                cssAttrs = 'right:0px; top: 0px; width: 2px; height: 0%;';
+                variable = 'height';
+                break;
+            case 'top':
+                cssAttrs = 'top:0px; left: 0px; height: 2px; width: 0%;';
+                variable = 'width';
+                break;
+            case 'bottom':
+                cssAttrs = 'bottom:0px; left: 0px; height: 2px; width: 0%;';
+                variable = 'width';
+                break;
+        }
+
+        scrollbarDiv.setAttribute('style', `${cssAttrs} position:absolute; background: ${options.color};`);
+        this.host.appendChild(scrollbarDiv);
+        this.clip.subscribe(`${prefix}_${new Date().getTime()}`, (ms, state) => {
+            scrollbarDiv.style[variable] = `${100*ms/this.clip.duration}%`;
+        });
     }
 
     _touchstart(ev) {
         ev.preventDefault();
         if (ev.touches.length === 1) {
-            this.previousTouch = ev.touches[0].clientY;
+            this.previousTouch = ev.touches[0][this.swipeAxis];
             this.transitioning = false;
         }
     }
@@ -61,7 +114,7 @@ class Player {
             clearTimeout(this.transitionTimeout);
         }
 
-        const distance = this.previousTouch - event.touches[0].clientY;
+        const distance = this.previousTouch - event.touches[0][this.swipeAxis];
 
         if (distance > 0) {
             this.direction = 'fw';
@@ -70,7 +123,7 @@ class Player {
             this.direction = 'bw';
         }
 
-        this.previousTouch = event.touches[0].clientY;
+        this.previousTouch = event.touches[0][this.swipeAxis];
         let millisecondsDelta = 10 * distance * this.speed;
         const journey = TimeCapsule.startJourney(this.clip);
         let newStation = this.clip.runTimeInfo.currentMillisecond + millisecondsDelta;

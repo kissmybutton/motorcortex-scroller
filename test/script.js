@@ -16,8 +16,7 @@ const myClip = new MC.Clip({
         display:block;
     }
     svg{
-        background: black;
-        margin-top:150px;    
+        background: black; 
     }`
 });
 
@@ -60,7 +59,12 @@ new Player({
             name: 'chapter 2'
         }
     ],
-    transitionSpeed: 2
+    transitionSpeed: 2,
+    swipeAxis: 'horizontal',
+    scrollbar: {
+        color: 'pink',
+        position: 'top'
+    }
 });
 
 

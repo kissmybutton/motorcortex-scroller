@@ -1,9 +1,9 @@
-const path = require( 'path' );
-const webpack = require( 'webpack' );
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
 
-	context: path.resolve( __dirname ),
+	context: path.resolve(__dirname),
 
 	entry: './test/script.js',
 
@@ -12,7 +12,7 @@ module.exports = {
 			'.js'
 		],
 		modules: [
-			path.resolve( './' ),
+			path.resolve('./'),
 			'node_modules'
 		]
 	},
@@ -28,40 +28,42 @@ module.exports = {
 	mode: 'development',
 
 	module: {
-		rules: [
-			{
+		rules: [{
 				test: /\.js?$/,
-				use: [ 'babel-loader' ],
+				use: ['babel-loader'],
 				exclude: /node_modules/
 			},
 			{
 				test: /\.css$/,
-				use: [ 'style-loader', 'css-loader' ]
+				use: ['style-loader', 'css-loader']
 			},
 			{
 				test: /\.scss$/,
-				use: [ {
-					loader: "style-loader", options: { sourceMap: true } // creates style nodes from JS strings
+				use: [{
+					loader: "style-loader",
+					options: { sourceMap: true } // creates style nodes from JS strings
 				}, {
-					loader: "css-loader", options: { sourceMap: true } // translates CSS into CommonJS
+					loader: "css-loader",
+					options: { sourceMap: true } // translates CSS into CommonJS
 				}, {
-					loader: "sass-loader", options: { sourceMap: true } // compiles Sass to CSS
-				} ]
+					loader: "sass-loader",
+					options: { sourceMap: true } // compiles Sass to CSS
+				}]
 			}
 		]
 	},
 
 	plugins: [
 
-		new webpack.ProvidePlugin( { 'Promise': 'es6-promise', 'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch' } ),
+		new webpack.ProvidePlugin({ 'Promise': 'es6-promise', 'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch' }),
 
-		new webpack.HotModuleReplacementPlugin( ),
+		new webpack.HotModuleReplacementPlugin(),
 		// enable HMR globally
 
-		new webpack.NamedModulesPlugin( ),
+		new webpack.NamedModulesPlugin(),
 		// prints more readable module names in the browser console on HMR updates
 
-		new webpack.NoEmitOnErrorsPlugin( ),
+		new webpack.NoEmitOnErrorsPlugin(),
 		// do not emit compiled assets that include errors
 
 	],
