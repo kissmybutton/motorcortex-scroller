@@ -43,7 +43,9 @@ const Player = new WheelPlayer({
 ```
 
 ## Options
+
 | Key | Description |
+| ------------- | ------------- |
 | mode | (optional, default = "free"). Either "free" or "chapters" |
 | wheelSpeed | (optional, default = 5). Valid input is any number from 1 to 10. It defines the speed the Clip will seek forwards or backwards when scrolling or swiping |
 | chapters | (valid only on "chapters" mode). It expects an array of objects each of which defines a chapter. Chapters are provided in the form: {name: "<the name of the chapter>", millisecond: <millisecond>} |
