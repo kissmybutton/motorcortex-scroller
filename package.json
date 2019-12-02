@@ -1,7 +1,7 @@
 {
   "name": "@kissmybutton/motorcortex-wheel-player",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/Player.js",
   "repository": "https://github.com/kissmybutton/motorcortex-flubber",
   "author": "Kiss My Button PC",
   "license": "MIT",

@@ -12,11 +12,9 @@ class Player {
      *  - millisecond
      * - wheelSpeed: a value from 1 to 10. Default 5
      * - transitionSpeed: a number > 0 that defines the speed of the transition
-     * - latency: an integer (in milliseconds) after wheel event that will trigger transition to chapter
-     * - progressIndicator: default false. If set to true a progress indicator will appear
      * - swipeAxis: (either 'vertical' or 'horizontal'. Default = 'vertical')
      * - easing: any of the supported MotorCortex easings
-     * - scrollbar: an object with scrollbar configuration:
+     * - progressBar: an object with progressBar configuration:
      *  - display: (boolean, default = true)
      *  - color: the color of the scrollbar (default purple)
      *  - position: (either "left", "right", "top" or "bottom", default "right")
@@ -57,8 +55,8 @@ class Player {
             position: 'right',
             color: 'purple'
         };
-        if (options.hasOwnProperty('scrollbar')) {
-            Object.assign(scrollbarOptions, options.scrollbar);
+        if (options.hasOwnProperty('progressBar')) {
+            Object.assign(scrollbarOptions, options.progressBar);
         }
         this._setupScrollbar(scrollbarOptions);
     }

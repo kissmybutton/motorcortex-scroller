@@ -48,7 +48,7 @@ myClip.addIncident(flubberIncident, 0);
 myClip.addIncident(fubberIncident2, 2000);
 new Player({
     clip: myClip,
-    speed: 5,
+    wheelSpeed: 5,
     mode: 'chapters',
     chapters: [{
             millisecond: 2000,
@@ -61,9 +61,9 @@ new Player({
     ],
     transitionSpeed: 2,
     swipeAxis: 'horizontal',
-    scrollbar: {
+    progressBar: {
         color: 'pink',
-        position: 'top'
+        position: 'bottom'
     }
 });
 
