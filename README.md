@@ -59,7 +59,7 @@ https://kissmybutton.github.io/motorcortex-scroller/demo/
 - On mobile: Swipe left or right to move between chapters
 - On desktop devices: use your mouse wheel
   
-  ## License
+## License
 [MIT License](https://opensource.org/licenses/MIT)
 
 
