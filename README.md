@@ -52,3 +52,11 @@ const Player = new WheelPlayer({
 | transitionSpeed | (valid only on "chapters" mode, optional, default = 1). Valid input is any number greater than 0. On scroll (or swipe) end the Clip will transition to the next (or previous) chapter. The speed of the transition is in real time (1:1). If provided, the transitionSpeed will affect the transition speed (e.g. setting it to 2 it will transition two times faster, setting it to 0.5 two times slower etc) |
 | swipeAxis | (optional, default = "vertical"). It defines the active axis of swipe. Default is vertical meaning the user will have to swipe upwards or downwards in order to control Clip's execution. If is set to "horizontal" the user will need to swipe to left or right |
 | progressBar | (optional, default is {display: true, position: 'right', color: 'purple'}). Progress bar visualises the progress of the Clip's execution. By default is positioned on the right and it's visible |
+  
+  ## License
+[MIT License](https://opensource.org/licenses/MIT)
+
+
+  
+  
+[![Kiss My Button](https://presskit.kissmybutton.gr/logos/kissmybutton-logo-small.png)](https://kissmybutton.gr)
