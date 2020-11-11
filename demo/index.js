@@ -3,7 +3,7 @@ const MC = require("@kissmybutton/motorcortex");
 const FlubberPlugin = MC.loadPlugin(MCFlubber);
 const Player = require("../dist/motorcortex-scroller.umd.js");
 
-const myClip = new MC.Clip({
+const myClip = new MC.HTMLClip({
   id: "my-clip",
   host: document.getElementById("clip-container"),
   html: `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500">

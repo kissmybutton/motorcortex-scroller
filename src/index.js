@@ -34,7 +34,7 @@ class Player {
     } else if (mode === "chapters") {
       this.transitionTimeout = null;
       this.transitionSpeed = options.transitionSpeed || 1;
-      this.easing = MC.API.easings[options.easing || "easeOutQuart"];
+      this.easing = MC.utils.easings[options.easing || "easeOutQuart"];
       this.transitionStart = null;
       options.chapters.sort(function (a, b) {
         return a.millisecond - b.millisecond;
