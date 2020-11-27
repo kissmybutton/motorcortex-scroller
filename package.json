@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-scroller",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "main": "dist/motorcortex-scroller.cjs.js",
   "module": "dist/motorcortex-scroller.esm.js",
   "browser": "dist/motorcortex-scroller.umd.js",
@@ -69,7 +69,7 @@
     "@babel/preset-env": "^7.9.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@kissmybutton/motorcortex": "6.0.8",
+    "@kissmybutton/motorcortex": "6.1.0",
     "@kissmybutton/motorcortex-flubber": "1.1.4",
     "@kissmybutton/motorcortex-player": "^1.5.11",
     "@semantic-release/changelog": "^5.0.1",
@@ -126,7 +126,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "6.0.8"
+    "@kissmybutton/motorcortex": "6.1.0"
   },
   "husky": {
     "hooks": {
