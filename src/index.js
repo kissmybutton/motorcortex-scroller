@@ -1,4 +1,4 @@
-const MC = require("@kissmybutton/motorcortex");
+import MC from "@kissmybutton/motorcortex";
 const TimeCapsule = new MC.TimeCapsule();
 const prefix = "@kissmybutton/scrollbar_player";
 
@@ -298,4 +298,4 @@ class Player {
   }
 }
 
-module.exports = Player;
+export default Player;

@@ -14,7 +14,7 @@
     "update-force:packages": "./node_modules/npm-check-updates/bin/ncu -u && npm i",
     "update:packages": "npm update --save/--save-dev",
     "concurrently": "concurrently -c \"cyan.bold,magenta.bold\" --names \"JS,Styles\"",
-    "lint:styles": "stylelint  --allow-empty-input \"src/**.css\" \"src/**/*.scss\" --config .stylelintrc.json",
+    "lint:styles": "stylelint  --allow-empty-input \"src/**.css\" --config .stylelintrc.json",
     "lint:js": "eslint -c .eslintrc src/**/*.js",
     "lint": "npm run concurrently \"npm:lint:js\" \"npm:lint:styles\"",
     "lint:fix": "npm run concurrently  \"npm:lint:js -- --fix\" \"npm:lint:styles -- --fix\"",
@@ -37,8 +37,9 @@
     "*.json": [
       "prettier --write"
     ],
-    "*.{css,scss}": [
-      "stylelint  \"src/**.css\" \"src/**/*.scss\" --config .stylelintrc.json --fix"
+    "*.{css}": [
+      "prettier --write",
+      "stylelint  \"src/**.css\" --config .stylelintrc.json --fix"
     ],
     "*.{js,jsx}": [
       "prettier --write",
@@ -83,25 +84,23 @@
     "commitizen": "4.2.3",
     "concurrently": "6.0.0",
     "coveralls": "3.1.0",
-    "css-loader": "3.6.0",
+    "css-loader": "^5.2.0",
     "cz-conventional-changelog": "3.3.0",
     "es6-promise": "4.2.8",
     "eslint": "7.22.0",
-    "eslint-config-prettier": "6.15.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-babel": "5.3.1",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-promise": "4.3.1",
-    "eslint-plugin-standard": "4.1.0",
-    "exports-loader": "0.7.0",
+    "exports-loader": "^1.1.1",
     "husky": "4.3.8",
-    "imports-loader": "0.8.0",
+    "imports-loader": "^1.2.0",
     "json-stringify-safe": "5.0.1",
     "lint-staged": "10.5.4",
-    "node-sass": "4.14.1",
-    "npm-check-updates": "4.1.2",
+    "npm-check-updates": "^11.3.0",
     "npx": "10.2.2",
     "prettier": "2.2.1",
     "rimraf": "3.0.2",
@@ -110,23 +109,20 @@
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "7.0.2",
-    "sass-loader": "8.0.2",
     "semantic-release": "17.4.2",
     "shelljs": "0.8.4",
     "stylelint": "13.12.0",
     "stylelint-config-prettier": "8.0.2",
-    "stylelint-config-recommended": "3.0.0",
-    "stylelint-config-recommended-scss": "4.2.0",
-    "stylelint-config-sass-guidelines": "7.1.0",
-    "stylelint-config-standard": "20.0.0",
-    "stylelint-scss": "3.19.0",
+    "stylelint-config-recommended": "^4.0.0",
+    "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint-config-standard": "^21.0.0",
     "webpack": "4.46.0",
-    "webpack-cli": "3.3.12",
+    "webpack-cli": "^4.5.0",
     "webpack-dev-server": "3.11.2",
     "whatwg-fetch": "3.6.2"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "6.1.0"
+    "@kissmybutton/motorcortex": "^6.1.0"
   },
   "husky": {
     "hooks": {

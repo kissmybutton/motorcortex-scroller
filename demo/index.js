@@ -1,7 +1,7 @@
-const MCFlubber = require("@kissmybutton/motorcortex-flubber");
-const MC = require("@kissmybutton/motorcortex");
+import MC from "@kissmybutton/motorcortex";
+import MCFlubber from "@kissmybutton/motorcortex-flubber";
+import Player from "../dist/motorcortex-scroller.esm.js";
 const FlubberPlugin = MC.loadPlugin(MCFlubber);
-const Player = require("../dist/motorcortex-scroller.umd.js");
 
 const myClip = new MC.HTMLClip({
   id: "my-clip",
@@ -16,7 +16,7 @@ const myClip = new MC.HTMLClip({
         display:block;
     }
     svg{
-        background: black; 
+        background: black;
     }`,
 });
 
@@ -73,5 +73,3 @@ new Player({
     position: "bottom",
   },
 });
-
-// myClip.play();
