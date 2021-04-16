@@ -1,23 +1,38 @@
-const MCFlubber = require("@kissmybutton/motorcortex-flubber");
-const MC = require("@kissmybutton/motorcortex");
-const FlubberPlugin = MC.loadPlugin(MCFlubber);
-const Player = require("../dist/motorcortex-scroller.umd.js");
+import { HTMLClip, loadPlugin } from "@kissmybutton/motorcortex";
+import MCFlubber from "@kissmybutton/motorcortex-flubber";
+import Player from "../dist/motorcortex-scroller.umd.js";
 
-const myClip = new MC.HTMLClip({
+const FlubberPlugin = loadPlugin(MCFlubber);
+
+const myClip = new HTMLClip({
   id: "my-clip",
   host: document.getElementById("clip-container"),
-  html: `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500">
-            <g transform="translate(240 10) scale(30 30)">
-                <path id="flubber" d="M1,0 L2,2 L0,2 Z"></path>
-            </g>
-        </svg>`,
-  css: `#flubber{
-        fill: #8b00ff;
-        display:block;
+  html: `
+    <div class="wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" width="150px" height="150px">
+        <g transform="scale(30)">
+          <path id="flubber" d="M1,0 L2,2 L0,2 Z"></path>
+        </g>
+      </svg>
+    </div>`,
+  css: `
+    .wrapper{
+      background:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      height:100%;
     }
-    svg{
-        background: black; 
-    }`,
+    #flubber{
+      fill: #8b00ff;
+      display:block;
+    }
+  `,
+  containerParams: {
+    width: "100%",
+    height: "90%",
+  },
 });
 
 const flubberIncident = new FlubberPlugin.Flubber(
@@ -55,7 +70,7 @@ myClip.addIncident(fubberIncident2, 2000);
 new Player({
   clip: myClip,
   wheelSpeed: 5,
-  mode: "chapters",
+  mode: "free",
   chapters: [
     {
       millisecond: 2000,
@@ -73,5 +88,3 @@ new Player({
     position: "bottom",
   },
 });
-
-// myClip.play();

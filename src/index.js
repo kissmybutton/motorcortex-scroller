@@ -1,8 +1,9 @@
-const MC = require("@kissmybutton/motorcortex");
+import MC from "@kissmybutton/motorcortex";
+
 const TimeCapsule = new MC.TimeCapsule();
 const prefix = "@kissmybutton/scrollbar_player";
 
-class Player {
+export default class Player {
   /**
    * @param {object} options - The options object (optional). Supported options are:
    * - clip: the Clip object
@@ -26,11 +27,12 @@ class Player {
       (options.swipeAxis || "vertical") === "vertical" ? "clientY" : "clientX";
 
     const mode = options.mode || "free";
+
     if (mode === "free") {
       this.host.onwheel = this.handlePlainWheel.bind(this);
       this.journey = TimeCapsule.startJourney(this.clip);
-      this.host.addEventListener("touchstart", this._touchstart.bind(this));
-      this.host.addEventListener("touchmove", this._touchmove.bind(this));
+      this.host.addEventListener("touchstart", this.touchstart.bind(this));
+      this.host.addEventListener("touchmove", this.touchmove.bind(this));
     } else if (mode === "chapters") {
       this.transitionTimeout = null;
       this.transitionSpeed = options.transitionSpeed || 1;
@@ -42,9 +44,9 @@ class Player {
       this.chapters = options.chapters;
       this.transitioning = false;
       this.host.onwheel = this.handleChapterWheel.bind(this);
-      this.host.addEventListener("touchstart", this._touchstart.bind(this));
-      this.host.addEventListener("touchmove", this._touchmove.bind(this));
-      this.host.addEventListener("touchend", this._chapterTouchend.bind(this));
+      this.host.addEventListener("touchstart", this.touchstart.bind(this));
+      this.host.addEventListener("touchmove", this.touchmove.bind(this));
+      this.host.addEventListener("touchend", this.chapterTouchend.bind(this));
     }
 
     const speedFactor = 5 / (options.wheelSpeed || 5);
@@ -55,13 +57,14 @@ class Player {
       position: "right",
       color: "purple",
     };
+
     if (options.progressBar !== undefined) {
       Object.assign(scrollbarOptions, options.progressBar);
     }
-    this._setupScrollbar(scrollbarOptions);
+    this.setupScrollbar(scrollbarOptions);
   }
 
-  _setupScrollbar(options) {
+  setupScrollbar(options) {
     if (options.display === false) {
       return;
     }
@@ -102,7 +105,7 @@ class Player {
     });
   }
 
-  _touchstart(ev) {
+  touchstart(ev) {
     ev.preventDefault();
     if (ev.touches.length === 1) {
       this.previousTouch = ev.touches[0][this.swipeAxis];
@@ -110,7 +113,7 @@ class Player {
     }
   }
 
-  _touchmove(ev) {
+  touchmove(ev) {
     ev.preventDefault();
     this.transitioning = false;
     if (this.transitionTimeout !== null) {
@@ -142,14 +145,14 @@ class Player {
     journey.destination(newStation);
   }
 
-  _chapterTouchend(event) {
+  chapterTouchend(event) {
     event.preventDefault();
 
     if (
       this.direction === "fw" &&
       this.clip.runTimeInfo.currentMillisecond !== this.clip.duration
     ) {
-      const nextChpater = this._getNextChapter(
+      const nextChpater = this.getNextChapter(
         this.clip.runTimeInfo.currentMillisecond
       );
       this.transitionTimeout = setTimeout(() => {
@@ -159,7 +162,7 @@ class Player {
       this.direction === "bw" &&
       this.clip.runTimeInfo.currentMillisecond !== 0
     ) {
-      const nextChpater = this._getPreviousChapter(
+      const nextChpater = this.getPreviousChapter(
         this.clip.runTimeInfo.currentMillisecond
       );
       this.transitionTimeout = setTimeout(() => {
@@ -168,7 +171,7 @@ class Player {
     }
   }
 
-  _getNextChapter(millisecond) {
+  getNextChapter(millisecond) {
     for (let i = 0; i < this.chapters.length; i++) {
       const chapter = this.chapters[i];
       if (chapter.millisecond > millisecond) {
@@ -178,7 +181,7 @@ class Player {
     return this.clip.duration;
   }
 
-  _getPreviousChapter(millisecond) {
+  getPreviousChapter(millisecond) {
     for (let i = this.chapters.length - 1; i >= 0; i--) {
       const chapter = this.chapters[i];
       if (chapter.millisecond < millisecond) {
@@ -210,12 +213,12 @@ class Player {
     }
 
     if (millisecondsDelta > 0) {
-      const nextChpater = this._getNextChapter(newStation);
+      const nextChpater = this.getNextChapter(newStation);
       this.transitionTimeout = setTimeout(() => {
         this.transitionToChapter(nextChpater, "fw");
       }, this.latency);
     } else if (millisecondsDelta < 0) {
-      const nextChpater = this._getPreviousChapter(newStation);
+      const nextChpater = this.getPreviousChapter(newStation);
       this.transitionTimeout = setTimeout(() => {
         this.transitionToChapter(nextChpater, "bw");
       }, this.latency);
@@ -232,10 +235,10 @@ class Player {
     this.journey = TimeCapsule.startJourney(this.clip);
     this.direction =
       this.targetMillisecond >= this.startMillisecond ? "fw" : "bw";
-    window.requestAnimationFrame(this._step.bind(this));
+    window.requestAnimationFrame(this.step.bind(this));
   }
 
-  _step(timestamp) {
+  step(timestamp) {
     if (this.transitionStart === null) {
       this.transitionStart = timestamp;
     }
@@ -279,7 +282,7 @@ class Player {
     if (completed) {
       this.journey.destination();
     } else {
-      window.requestAnimationFrame(this._step.bind(this));
+      window.requestAnimationFrame(this.step.bind(this));
     }
   }
 
@@ -297,5 +300,3 @@ class Player {
     this.journey.station(newStation);
   }
 }
-
-module.exports = Player;
