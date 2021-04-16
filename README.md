@@ -7,7 +7,7 @@ On "chapters" mode the developer can define distinct chapters (by providing thei
 ## API
 To use the Wheel Player you need to import it
 ```javascript
-const WheelPlayer = import('@kissmybutton/motorcortex-wheel-player');
+import WheelPlayer from "@kissmybutton/motorcortex-wheel-player"
 ```
 
 and then you just instantiate a new Player object passing options:
