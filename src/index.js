@@ -1,5 +1,4 @@
 import MC from "@kissmybutton/motorcortex";
-
 const TimeCapsule = new MC.TimeCapsule();
 const prefix = "@kissmybutton/scrollbar_player";
 
