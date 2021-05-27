@@ -70,7 +70,7 @@
     "@babel/preset-env": "7.14.2",
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
-    "@kissmybutton/motorcortex": "6.4.3",
+    "@kissmybutton/motorcortex": "7.0.1",
     "@kissmybutton/motorcortex-flubber": "1.1.8",
     "@kissmybutton/motorcortex-player": "1.9.4",
     "@semantic-release/changelog": "5.0.1",
