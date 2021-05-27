@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-scroller",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "main": "dist/motorcortex-scroller.cjs.js",
   "module": "dist/motorcortex-scroller.esm.js",
   "browser": "dist/motorcortex-scroller.umd.js",
@@ -21,7 +21,7 @@
     "build": "npm run build:lib && npm run build:demo",
     "build:lib": "rollup -c",
     "start": "npm run build:lib && concurrently -c \"cyan.bold,magenta.bold\" \"npm:build:lib -- -w\"  \"npm:start:demo\" ",
-    "start:demo": "webpack-dev-server --mode=development --config ./demo/webpack.config.js",
+    "start:demo": "webpack serve --config ./demo/webpack.config.js --mode=development --progress ",
     "build:demo": "webpack --mode=production --config ./demo/webpack.config.js",
     "test": "HERE GOES YOUR TEST TASK",
     "test:prod": "npm run lint",
@@ -70,9 +70,8 @@
     "@babel/preset-env": "7.14.2",
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
-    "@kissmybutton/motorcortex": "6.4.3",
+    "@kissmybutton/motorcortex": "^7.0.1",
     "@kissmybutton/motorcortex-flubber": "1.1.8",
-    "@kissmybutton/motorcortex-player": "1.9.4",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
     "@semantic-release/github": "7.2.3",
@@ -122,7 +121,7 @@
     "whatwg-fetch": "3.6.2"
   },
   "peerDependencies": {
-    "@kissmybutton/motorcortex": "^6.1.0"
+    "@kissmybutton/motorcortex": ">= 6.4.1 < 8"
   },
   "husky": {
     "hooks": {
